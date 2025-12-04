@@ -105,7 +105,11 @@ echo "Prometheus started. Logs: /opt/prometheus/prometheus.log"
 ```
 bash /opt/self-healing-infra/prometheus/start-prometheus.sh
 ```
-
+# 🔄 Verify Service Are Running
+Prometheus
+```
+ss -tulnp | grep 9090
+```
 file `alertmanager.yml`
 ```
 route:
@@ -140,6 +144,11 @@ echo "Alertmanager started. Logs: /opt/alertmanager/alertmanager.log"
 ```
 bash /opt/self-healing-infra/alertmanager/start-alertmanager.sh
 ```
+# 🔄 Verify Service Are Running
+Alertmanager
+```
+ss -tulnp | grep 9093
+```
 file `webhook.py`
 ```
 from flask import Flask, request
@@ -173,6 +182,11 @@ echo "Webhook started. Logs: webhook.log"
 ```
 bash /opt/self-healing-infra/webhook/start-webhook.sh
 ```
+# 🔄 Verify Service Are Running
+Webhook
+```
+ss -tulnp | grep 5001
+```
 file `heal.yml`
 ```
 ---
@@ -185,5 +199,30 @@ file `heal.yml`
       service:
         name: nginx
         state: restarted
-
 ```
+# run ansible playbook
+```
+ansible-playbook /opt/self-healing-infra/ansible/heal.yml
+```
+## 🧪 Testing the Auto-Healing (Demo)
+### Step 1 — Stop NGINX manually:
+```
+sudo systemctl stop nginx
+```
+### Step 2 — Prometheus detects:  
+`**"NGINX service down"**`
+### Step 3 — Alertmanager triggers webhook → runs Ansible.
+### Step 4 — Ansible heals service:
+
+NGINX automatically starts again 🎉
+
+## ✅ Conclusion
+
+This project demonstrates a complete **Self-Healing Infrastructure** using:
+
+- Prometheus  
+- Alertmanager  
+- Webhook  
+- Ansible  
+
+If any service fails → It automatically recovers without human intervention.
