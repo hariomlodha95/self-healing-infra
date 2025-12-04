@@ -1,0 +1,11 @@
+---
+- name: Auto-Healing Playbook
+  hosts: localhost
+  become: yes
+
+  tasks:
+    - name: Restart NGINX service
+      service:
+        name: nginx
+        state: restarted
+
