@@ -1,7 +1,7 @@
-## Self-Healing Infrastructure using Prometheus, Alertmanager, Webhook & Ansible
+# Self-Healing Infrastructure using Prometheus, Alertmanager, Webhook & Ansible
 Automatically detect service failures and auto-recover using monitoring + automation.
 
-# 📌 Overview
+## 📌 Overview
 This project implements a Self-Healing Infrastructure where:
 - Prometheus monitors system & service health
 - Alertmanager triggers alerts when NGINX goes down
@@ -19,7 +19,7 @@ This creates a fully automated auto-recovery mechanism.
 - Ansible (Auto-Healing)
 - Shell Scripts (Automation)
 
-# 📁 Project Structure
+## 📁 Project Structure
 ```
 self-healing-infra/
 ├── alertmanager  
@@ -101,11 +101,11 @@ $PROM_PATH \
 echo "Prometheus started. Logs: /opt/prometheus/prometheus.log"
 
 ```
-# Start Prometheus
+## Start Prometheus
 ```
 bash /opt/self-healing-infra/prometheus/start-prometheus.sh
 ```
-# 🔄 Verify Service Are Running
+## 🔄 Verify Service Are Running
 Prometheus
 ```
 ss -tulnp | grep 9090
@@ -140,11 +140,11 @@ $ALERT_PATH \
 echo "Alertmanager started. Logs: /opt/alertmanager/alertmanager.log"
 
 ```
-# Start Alertmanager
+## Start Alertmanager
 ```
 bash /opt/self-healing-infra/alertmanager/start-alertmanager.sh
 ```
-# 🔄 Verify Service Are Running
+## 🔄 Verify Service Are Running
 Alertmanager
 ```
 ss -tulnp | grep 9093
@@ -178,11 +178,11 @@ python3 $SCRIPT > /opt/self-healing-infra/webhook/webhook.log 2>&1 &
 echo "Webhook started. Logs: webhook.log"
 
 ```
-# Start Webhook
+## Start Webhook
 ```
 bash /opt/self-healing-infra/webhook/start-webhook.sh
 ```
-# 🔄 Verify Service Are Running
+## 🔄 Verify Service Are Running
 Webhook
 ```
 ss -tulnp | grep 5001
@@ -200,7 +200,7 @@ file `heal.yml`
         name: nginx
         state: restarted
 ```
-# run ansible playbook
+## run ansible playbook
 ```
 ansible-playbook /opt/self-healing-infra/ansible/heal.yml
 ```
