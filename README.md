@@ -41,7 +41,7 @@ self-healing-infra/
     ├── webhook.log  
     └── webhook.py  
 ```
-#### file `prometheus.yml`
+##### file `prometheus.yml`
 ```
 global:
   scrape_interval: 5s
@@ -58,7 +58,7 @@ rule_files:
   - "rules.yml"
 
 ```
-### file `rulse.yml`
+##### file `rulse.yml`
 ```
 groups:
 - name: service-alerts
@@ -79,7 +79,7 @@ groups:
     annotations:
       description: "CPU usage is above 90%."
 ```
-####file `start-prometheus.sh`
+##### file `start-prometheus.sh`
 ```
 #!/bin/bash
 
@@ -110,7 +110,7 @@ Prometheus
 ```
 ss -tulnp | grep 9090
 ```
-####file `alertmanager.yml`
+##### file `alertmanager.yml`
 ```
 route:
   receiver: 'ansible-webhook'
@@ -121,7 +121,7 @@ receivers:
       - url: 'http://localhost:5001/webhook'
 
 ```
-####file `start-alertmanager.sh `
+##### file `start-alertmanager.sh `
 ```
 #!/bin/bash
 
@@ -149,7 +149,7 @@ Alertmanager
 ```
 ss -tulnp | grep 9093
 ```
-####file `webhook.py`
+##### file `webhook.py`
 ```
 from flask import Flask, request
 import os
@@ -165,7 +165,7 @@ def webhook():
 app.run(host="0.0.0.0", port=5001)
 
 ```
-####file ` start-webhook.sh`
+##### file ` start-webhook.sh`
 ```
 #!/bin/bash
 
@@ -187,7 +187,7 @@ Webhook
 ```
 ss -tulnp | grep 5001
 ```
-####file `heal.yml`
+##### file `heal.yml`
 ```
 ---
 - name: Auto-Healing Playbook
