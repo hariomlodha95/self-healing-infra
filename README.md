@@ -41,7 +41,7 @@ self-healing-infra/
     ├── webhook.log  
     └── webhook.py  
 ```
-####file `prometheus.yml`
+#### file `prometheus.yml`
 ```
 global:
   scrape_interval: 5s
@@ -58,7 +58,7 @@ rule_files:
   - "rules.yml"
 
 ```
-###file `rulse.yml`
+### file `rulse.yml`
 ```
 groups:
 - name: service-alerts
